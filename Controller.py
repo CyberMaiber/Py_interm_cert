@@ -2,62 +2,64 @@ import Model
 import View
 
 
-
 def main_menu():
     while True:
         print('\nГлавное меню:')
-        print('1. Добавить контакт')
-        print('2. Удалить контакт')
-        print('3. Изменить контакт')
-        print('6. Поиск контакта')
-        print('7. Открыть файл')
-        print('8. Сохранить файл')
+        print('1. Показать список заметок')
+        print('2. Показать заметку')
+        print('3. Добавить заметку')
+        print('4. Изменить заметку')
+        print('5. Удалить заметку')
+        
+        
+        
+        # print('6. Поиск контакта')
         print('0. Выйти из программы')
         choice = int(input('Выберите пункт: '))
         match (choice):
             case 1:
-                add_contact()
-                print('\nКонтакт добавлен\n')
+                add_note()
+                print('\nЗаметка добавлена\n')
             case 2:
-                remove_contact()
-                print('\nКонтакт удален\n')
+                remove_note()
+                print('\nЗаметка удалена\n')
             case 3:
-                change_contact()
-            case 6:
-                find_contacts()
-            case 7:
-                open_file()
-            case 8:
-                save_file()
-                print('\nФайл сохранен!\n')
+                change_note()
+                
+            # case 6:
+            #     find_contacts()
+            # case 7:
+            #     open_file()
+            # case 8:
+            #     save_file()
+            #     print('\nФайл сохранен!\n')
             case 0:
                 break
 
 
 def start():
-    # open_file()
-    View.printPhoneBook()
+    open_file()
+    View.printNoteBook()
     main_menu()
 
 
-
 def open_file():
-    while True:
-        file_name = input('Введите имя файла телефонной книги: ')
-        try:    
-            with open(file_name, "r", encoding="UTF-8") as data:
-                Model.path = file_name
-                contacts_list = data.read().split("\n")
-                Model.phonebook = contacts_list
-                break
-        except:
-            print('Файл не найден. Введите заново имя файла, либо введите exit')
-            if file_name == 'exit': break
-    View.printPhoneBook()
+    # while True:
+        # input('Введите имя файла телефонной книги: ')
+    file_name = 'notebook.txt'
+    try:
+        with open(file_name, "r", encoding="UTF-8") as data:
+            Model.path = file_name
+            notes_list = data.read().split("\n")
+            Model.notebook = notes_list
+    except:
+        print('Предыдущих заметок не найдено. Будет создан новый файл.')
+        # if file_name == 'exit': break
+    View.printNoteBook()
 
 def save_file():
     with open(Model.path, "w", encoding="UTF-8") as data:
-        data.write(('\n'.join(Model.phonebook)))
+        data.write(('\n'.join(Model.notebook)))
 
 def add_contact():
     name = input('Введите имя: ')
@@ -82,9 +84,9 @@ def change_contact():
     print(contact)
     contact[choice2] = input('Введите новое значение: ')
     print(contact)
-    Model.phonebook.insert(choice, ';'.join(contact))
-    View.printPhoneBook()
+    Model.notebook.insert(choice, ';'.join(contact))
+    View.printNoteBook()
 
 def find_contacts():
     toSearch = input('Введите данные для поиска: ')
-    View.printPhoneBookFltr(toSearch)
+    View.printNoteBookFltr(toSearch)
