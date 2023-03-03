@@ -6,26 +6,25 @@ def main_menu():
     while True:
         print('\nГлавное меню:')
         print('1. Показать список заметок')
-        print('2. Показать заметку')
-        print('3. Добавить заметку')
-        print('4. Изменить заметку')
-        print('5. Удалить заметку')
-        
-        
-        
-        # print('6. Поиск контакта')
+        print('2. Показать заметку...')
+        print('3. Добавить заметку...')
+        print('4. Изменить заметку...')
+        print('5. Удалить заметку...')
         print('0. Выйти из программы')
         choice = int(input('Выберите пункт: '))
         match (choice):
-            case 1:
+            case 3:
                 add_note()
                 print('\nЗаметка добавлена\n')
-            case 2:
+            case 5:
                 remove_note()
                 print('\nЗаметка удалена\n')
-            case 3:
+            case 4:
                 change_note()
-                
+            case 1:
+                show_all_notes()
+            case 2:
+                show_note()
             # case 6:
             #     find_contacts()
             # case 7:
