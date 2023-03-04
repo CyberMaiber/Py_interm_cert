@@ -33,7 +33,7 @@ def main_menu():
 
 def start():
     load_notes()
-    Interact.printNoteBook(Model.notebook)
+    # Interact.printNoteBook(Model.notebook)
     main_menu()
 
 
@@ -41,12 +41,12 @@ def load_notes():
     # while True:
         # input('Введите имя файла телефонной книги: ')
     Model.path = 'notebook.txt'
-    # try:
-    Model.notebook = LoadSave.loadData(Model.path)
-    Model.current_index = Model.getIndex(Model.notebook[-1]) + 1
-    # except:
-        # Interact.new_notes_tobe_created()
-    Interact.printNoteBook(Model.notebook)
+    try:
+        Model.notebook = LoadSave.loadData(Model.path)
+        Model.current_index = Model.getIndex(Model.notebook[-1]) + 1
+    except:
+        Interact.new_notes_tobe_created()
+    # Interact.printNoteBook(Model.notebook)
 
 def save_notes():
    LoadSave.saveData(Model.path, Model.notebook)
