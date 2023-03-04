@@ -1,24 +1,17 @@
 import Model
-import View
-
+import Interact
+import LoadSave
 
 def main_menu():
     while True:
-        print('\nГлавное меню:')
-        print('1. Показать список заметок')
-        print('2. Показать заметку...')
-        print('3. Добавить заметку...')
-        print('4. Изменить заметку...')
-        print('5. Удалить заметку...')
-        print('0. Выйти из программы')
-        choice = int(input('Выберите пункт: '))
+        choice = Interact.choice_menu()
         match (choice):
             case 3:
                 add_note()
-                print('\nЗаметка добавлена\n')
+                Interact.print_note_added()
             case 5:
                 remove_note()
-                print('\nЗаметка удалена\n')
+                Interact.print_note_deleted()
             case 4:
                 change_note()
             case 1:
@@ -37,44 +30,38 @@ def main_menu():
 
 
 def start():
-    open_file()
-    View.printNoteBook()
+    load_notes()
+    Interact.printNoteBook()
     main_menu()
 
 
-def open_file():
+def load_notes():
     # while True:
         # input('Введите имя файла телефонной книги: ')
-    file_name = 'notebook.txt'
+    Model.path = 'notebook.txt'
     try:
-        with open(file_name, "r", encoding="UTF-8") as data:
-            Model.path = file_name
-            notes_list = data.read().split("\n")
-            Model.notebook = notes_list
+        Model.notebook = LoadSave.loadData(Model.path)
     except:
-        print('Предыдущих заметок не найдено. Будет создан новый файл.')
-        # if file_name == 'exit': break
-    View.printNoteBook()
+        Interact.notes_file_tobe_created()
+    Interact.printNoteBook()
 
-def save_file():
-    with open(Model.path, "w", encoding="UTF-8") as data:
-        data.write(('\n'.join(Model.notebook)))
+def save_notes():
+   LoadSave.saveData(Model.path, Model.notebook)
 
-def add_contact():
-    name = input('Введите имя: ')
-    surname = input('Введите фамилию: ')
-    last_name = input('Введите отчество: ')
-    phone = input('Введите телефон: ')
-    contact = f'{name}; {surname}; {last_name}; {phone};\n'
-    Model.phonebook.append(contact)
-    View.printPhoneBook()
+def add_note():
+    name = input('Введите название заметки: ')
+    body = input('Введите текст заметки: ')
+    contact = f'{Model.current_index}; {surname}; {name}; {body};\n'
+    Model.current_index += 1
+    Model.notebook.append(contact)
+    Interact.printNoteeBook()
 
-def remove_contact():
-    choice = int(input('Введите номер элемента для удаления: '))
+def remove_note():
+    choice = Interact.choice_to_delete()
     Model.phonebook.pop(choice)
-    View.printPhoneBook()
+    Interact.printPhoneBook()
 
-def change_contact():
+def change_note():
 
     choice = int(input('Введите номер элемента для изменения: '))
     choice2 = int(input('Что изменяем (0-имя, 1-фамилия, 2-отчество, 3-телефон): '))
@@ -84,8 +71,13 @@ def change_contact():
     contact[choice2] = input('Введите новое значение: ')
     print(contact)
     Model.notebook.insert(choice, ';'.join(contact))
-    View.printNoteBook()
+    Interact.printNoteBook()
 
-def find_contacts():
-    toSearch = input('Введите данные для поиска: ')
-    View.printNoteBookFltr(toSearch)
+def show_all_notes():
+    None
+
+def show_note():
+    None
+# def find_contacts():
+#     toSearch = input('Введите данные для поиска: ')
+#     View.printNoteBookFltr(toSearch)
