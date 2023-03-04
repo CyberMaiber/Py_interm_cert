@@ -1,6 +1,7 @@
 import Model
 import Interact
 import LoadSave
+from datetime import datetime
 
 def main_menu():
     while True:
@@ -26,12 +27,13 @@ def main_menu():
             #     save_file()
             #     print('\nФайл сохранен!\n')
             case 0:
+                save_notes()
                 break
 
 
 def start():
     load_notes()
-    Interact.printNoteBook()
+    Interact.printNoteBook(Model.notebook)
     main_menu()
 
 
@@ -39,11 +41,12 @@ def load_notes():
     # while True:
         # input('Введите имя файла телефонной книги: ')
     Model.path = 'notebook.txt'
-    try:
-        Model.notebook = LoadSave.loadData(Model.path)
-    except:
-        Interact.notes_file_tobe_created()
-    Interact.printNoteBook()
+    # try:
+    Model.notebook = LoadSave.loadData(Model.path)
+    Model.current_index = Model.getIndex(Model.notebook[-1]) + 1
+    # except:
+        # Interact.new_notes_tobe_created()
+    Interact.printNoteBook(Model.notebook)
 
 def save_notes():
    LoadSave.saveData(Model.path, Model.notebook)
@@ -51,10 +54,10 @@ def save_notes():
 def add_note():
     name = input('Введите название заметки: ')
     body = input('Введите текст заметки: ')
-    contact = f'{Model.current_index}; {surname}; {name}; {body};\n'
+    note = f'{Model.current_index}{Model.splitter}{datetime.now()}{Model.splitter}{name}{Model.splitter}{body}'
     Model.current_index += 1
-    Model.notebook.append(contact)
-    Interact.printNoteeBook()
+    Model.notebook.append(note)
+    Interact.printNoteBook(Model.notebook)
 
 def remove_note():
     choice = Interact.choice_to_delete()
@@ -74,7 +77,7 @@ def change_note():
     Interact.printNoteBook()
 
 def show_all_notes():
-    None
+    Interact.printNoteBook(Model.notebook)
 
 def show_note():
     None

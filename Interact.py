@@ -16,7 +16,7 @@ def print_note_added():
 def print_note_deleted():
     print('\nЗаметка удалена\n')
 
-def notes_file_tobe_created():
+def new_notes_tobe_created():
     print('\nПредыдущих заметок не найдено. Будет создан новый файл.\n')
 
 def printNoteBook(notebook):
