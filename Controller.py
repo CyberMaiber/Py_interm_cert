@@ -16,7 +16,7 @@ def main_menu():
             case 4:
                 change_note()
             case 1:
-                show_all_notes()
+                printNotebook()
             case 2:
                 show_note()
             # case 6:
@@ -56,12 +56,10 @@ def add_note():
     note = f'{Model.current_index}{Model.splitter}{datetime.now()}{Model.splitter}{name}{Model.splitter}{body}'
     Model.current_index += 1
     Model.notebook.append(note)
-    printNotebook()
 
 def remove_note():
-    choice = Interact.choice_to_delete()
-    Model.phonebook.pop(choice)
-    printNotebook()
+    choice = Model.getNumByIndex(Interact.choice_to_delete())
+    Model.notebook.pop(choice)
 
 def change_note():
 
@@ -73,9 +71,6 @@ def change_note():
     contact[choice2] = input('Введите новое значение: ')
     print(contact)
     Model.notebook.insert(choice, ';'.join(contact))
-    printNotebook()
-
-def show_all_notes():
     printNotebook()
 
 def show_note():
