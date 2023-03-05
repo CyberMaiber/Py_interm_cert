@@ -15,17 +15,14 @@ def main_menu():
                 Interact.print_note_deleted()
             case 4:
                 change_note()
+                Interact.print_note_changed()
             case 1:
                 printNotebook()
+            case 6:
+                #печатаем с соритировкой по дате
+                Interact.printNoteBook_sortByDate()
             case 2:
                 show_note()
-            # case 6:
-            #     find_contacts()
-            # case 7:
-            #     open_file()
-            # case 8:
-            #     save_file()
-            #     print('\nФайл сохранен!\n')
             case 0:
                 save_notes()
                 break
@@ -37,8 +34,6 @@ def start():
 
 
 def load_notes():
-    # while True:
-        # input('Введите имя файла телефонной книги: ')
     Model.path = 'notebook.txt'
     try:
         Model.notebook = LoadSave.loadData(Model.path)
@@ -78,10 +73,6 @@ def change_note():
 def show_note():
     i = Model.getNumByIndex(Interact.choice_to_show())
     Interact.printOneNote(Model.notebook[i],Model.splitter)
-
-# def find_contacts():
-#     toSearch = input('Введите данные для поиска: ')
-#     View.printNoteBookFltr(toSearch)
 
 def printNotebook():
     Interact.printNoteBook(Model.notebook,Model.splitter)

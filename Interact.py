@@ -16,6 +16,9 @@ def print_note_added():
 def print_note_deleted():
     print('\nЗаметка удалена\n')
 
+def print_note_changed():
+    print('\nЗаметка изменена\n')
+
 def new_notes_tobe_created():
     print('\nПредыдущих заметок не найдено. Будет создан новый файл.\n')
 
@@ -40,3 +43,6 @@ def adding_name ():
 
 def adding_body():
     return input('Введите текст заметки: ')
+
+def printNoteBook_sortByDate():
+    None
