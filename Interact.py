@@ -1,3 +1,4 @@
+from datetime import datetime
 
 def choice_menu():
     print('\nГлавное меню:')
@@ -6,6 +7,7 @@ def choice_menu():
     print('3. Добавить заметку...')
     print('4. Изменить заметку...')
     print('5. Удалить заметку...')
+    print('6. Показать список заметок с сортировкой по дате')
     print('0. Выйти из программы')
     choice = int(input('Выберите пункт: '))
     return choice
@@ -23,7 +25,7 @@ def new_notes_tobe_created():
     print('\nПредыдущих заметок не найдено. Будет создан новый файл.\n')
 
 def printNoteBook(notebook,splitter):
-    print(f'ID\tДата-время\tНазвание')
+    print(f'ID\tДата-время\t\t\tНазвание')
     for item in notebook:
         temp = item.split(splitter) 
         print(f'{temp[0]}\t{temp[1]}\t{temp[2]}')
@@ -44,5 +46,21 @@ def adding_name ():
 def adding_body():
     return input('Введите текст заметки: ')
 
-def printNoteBook_sortByDate():
-    None
+def printNoteBook_sortByDate(notebook,splitter):
+    tempbook = []
+    tempbook = notebook.copy()
+    while len(tempbook) != 0:
+        i = 0
+        temp = tempbook[i].split(splitter)
+        minDate = datetime.strptime(temp[1],"%Y-%m-%d %H:%M:%S.%f")
+        j = 0
+        for item in tempbook:
+            temp = item.split(splitter)
+            tempDate = datetime.strptime(temp[1],"%Y-%m-%d %H:%M:%S.%f")
+            if tempDate <= minDate:
+                minDate = tempDate
+                i = j
+            j += 1
+        temp = tempbook[i].split(splitter)
+        print(f'{temp[0]}\t{temp[1]}\t{temp[2]}')
+        tempbook.pop(i)

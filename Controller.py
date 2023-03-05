@@ -20,7 +20,7 @@ def main_menu():
                 printNotebook()
             case 6:
                 #печатаем с соритировкой по дате
-                Interact.printNoteBook_sortByDate()
+                Interact.printNoteBook_sortByDate(Model.notebook,Model.splitter)
             case 2:
                 show_note()
             case 0:
