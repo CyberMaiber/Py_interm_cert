@@ -1,3 +1,5 @@
+from datetime import datetime
+
 notebook = []
 
 splitter = "|"
@@ -17,3 +19,17 @@ def getNumByIndex(index):
         else:
             i += 1
     return -1
+
+def replaceName(number,newName):
+    temp = notebook[number].split(splitter)
+    notebook[number] = notebook[number].replace(temp[2],newName)
+    replaceDate(number)
+
+def replaceBody(number,newBody):
+    temp = notebook[number].split(splitter)
+    notebook[number] = notebook[number].replace(temp[3],newBody)
+    replaceDate(number)
+
+def replaceDate(number):
+    temp = notebook[number].split(splitter)
+    notebook[number] = notebook[number].replace(temp[1],str(datetime.now()))

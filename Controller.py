@@ -51,8 +51,8 @@ def save_notes():
    LoadSave.saveData(Model.path, Model.notebook)
 
 def add_note():
-    name = input('Введите название заметки: ')
-    body = input('Введите текст заметки: ')
+    name = Interact.adding_name()
+    body = Interact.adding_body()
     note = f'{Model.current_index}{Model.splitter}{datetime.now()}{Model.splitter}{name}{Model.splitter}{body}'
     Model.current_index += 1
     Model.notebook.append(note)
@@ -63,15 +63,17 @@ def remove_note():
 
 def change_note():
 
-    choice = int(input('Введите номер элемента для изменения: '))
-    choice2 = int(input('Что изменяем (0-имя, 1-фамилия, 2-отчество, 3-телефон): '))
+    choice = Model.getNumByIndex(int(input('Введите индекс элемента для изменения: ')))
+    choice2 = int(input('Что изменяем (1-Название, 2-Текст заметки): '))
+    
+    Interact.printOneNote(Model.notebook[choice],Model.splitter)
 
-    contact = Model.phonebook.pop(choice).split(';')
-    print(contact)
-    contact[choice2] = input('Введите новое значение: ')
-    print(contact)
-    Model.notebook.insert(choice, ';'.join(contact))
-    printNotebook()
+    match (choice2):
+        case 1:
+            Model.replaceName(choice,input('Введите новое название заметки: '))
+        case 2:
+            Model.replaceBody(choice,input('Введите новый текст заметки: '))
+    
 
 def show_note():
     i = Model.getNumByIndex(Interact.choice_to_show())
