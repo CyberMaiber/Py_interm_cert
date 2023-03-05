@@ -19,13 +19,18 @@ def print_note_deleted():
 def new_notes_tobe_created():
     print('\nПредыдущих заметок не найдено. Будет создан новый файл.\n')
 
-def printNoteBook(notebook):
-    for i, item in enumerate(notebook):
-        print(i , item)
+def printNoteBook(notebook,splitter):
+    for item in notebook:
+        temp = item.split(splitter) 
+        print(f'{temp[0]}\t{temp[1]}\t{temp[2]}')
 
-def printOneNote():
-    None
+def printOneNote(item,splitter):
+    temp = item.split(splitter) 
+    print(f'\n{temp[2]}\n{temp[1]}\n{temp[3]}')
+
 
 def choice_to_delete():
-    return int(input('Введите номер элемента для удаления: '))
+    return int(input('Введите индекс элемента для удаления: '))
 
+def choice_to_show():
+    return int(input('Введите индекс элемента для отображения: '))

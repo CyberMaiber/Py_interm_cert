@@ -33,7 +33,6 @@ def main_menu():
 
 def start():
     load_notes()
-    # Interact.printNoteBook(Model.notebook)
     main_menu()
 
 
@@ -46,7 +45,7 @@ def load_notes():
         Model.current_index = Model.getIndex(Model.notebook[-1]) + 1
     except:
         Interact.new_notes_tobe_created()
-    # Interact.printNoteBook(Model.notebook)
+
 
 def save_notes():
    LoadSave.saveData(Model.path, Model.notebook)
@@ -57,12 +56,12 @@ def add_note():
     note = f'{Model.current_index}{Model.splitter}{datetime.now()}{Model.splitter}{name}{Model.splitter}{body}'
     Model.current_index += 1
     Model.notebook.append(note)
-    Interact.printNoteBook(Model.notebook)
+    printNotebook()
 
 def remove_note():
     choice = Interact.choice_to_delete()
     Model.phonebook.pop(choice)
-    Interact.printPhoneBook()
+    printNotebook()
 
 def change_note():
 
@@ -74,13 +73,18 @@ def change_note():
     contact[choice2] = input('Введите новое значение: ')
     print(contact)
     Model.notebook.insert(choice, ';'.join(contact))
-    Interact.printNoteBook()
+    printNotebook()
 
 def show_all_notes():
-    Interact.printNoteBook(Model.notebook)
+    printNotebook()
 
 def show_note():
-    None
+    i = Model.getNumByIndex(Interact.choice_to_show())
+    Interact.printOneNote(Model.notebook[i],Model.splitter)
+
 # def find_contacts():
 #     toSearch = input('Введите данные для поиска: ')
 #     View.printNoteBookFltr(toSearch)
+
+def printNotebook():
+    Interact.printNoteBook(Model.notebook,Model.splitter)
