@@ -57,17 +57,14 @@ def remove_note():
     Model.notebook.pop(choice)
 
 def change_note():
-
-    choice = Model.getNumByIndex(int(input('Введите индекс элемента для изменения: ')))
-    choice2 = int(input('Что изменяем (1-Название, 2-Текст заметки): '))
-    
+    choice = Model.getNumByIndex(Interact.choice_to_change())
+    choice2 = Interact.choice_to_change2()
     Interact.printOneNote(Model.notebook[choice],Model.splitter)
-
     match (choice2):
         case 1:
-            Model.replaceName(choice,input('Введите новое название заметки: '))
+            Model.replaceName(choice,Interact.new_name_add())
         case 2:
-            Model.replaceBody(choice,input('Введите новый текст заметки: '))
+            Model.replaceBody(choice,Interact.new_body_add())
     
 
 def show_note():

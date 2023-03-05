@@ -40,6 +40,18 @@ def choice_to_delete():
 def choice_to_show():
     return int(input('Введите индекс элемента для отображения: '))
 
+def choice_to_change():
+    return int(input('Введите индекс элемента для изменения: '))
+
+def choice_to_change2():
+    return int(input('Что изменяем (1-Название, 2-Текст заметки): '))
+
+def new_name_add():
+    return input('Введите новое название заметки: ')
+
+def new_body_add():
+    return input('Введите новый текст заметки: ')
+
 def adding_name ():
     return input('Введите название заметки: ')
 

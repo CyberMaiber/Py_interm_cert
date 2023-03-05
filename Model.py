@@ -18,7 +18,7 @@ def getNumByIndex(index):
             return i
         else:
             i += 1
-    return -1
+    return None
 
 def replaceName(number,newName):
     temp = notebook[number].split(splitter)
